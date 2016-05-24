@@ -21,10 +21,10 @@ public class ViewStatsActivity extends InstaMonitorActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if(getSupportActionBar()!=null)
+        if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(getActionBar()!=null)
+        if (getActionBar() != null)
             getActionBar().setDisplayHomeAsUpEnabled(true);
 
         textViewTotalTime = (TextView) findViewById(R.id.textView_time);
@@ -44,7 +44,7 @@ public class ViewStatsActivity extends InstaMonitorActivity {
             }
         } else
             activitiesSummary = getString(R.string.no_data);
-        textViewActivities.setText(activitiesSummary);
+        textViewActivities.setText(activitiesSummary.trim());
 
         ArrayList<InstaMonitorFragmentModel> fragmentModels =
                 InstaMonitorDatabaseInterface.getFragments(this);
@@ -56,7 +56,7 @@ public class ViewStatsActivity extends InstaMonitorActivity {
             }
         } else
             fragmentsSummary = getString(R.string.no_data);
-        textViewFragments.setText(fragmentsSummary);
+        textViewFragments.setText(fragmentsSummary.trim());
 
     }
 }
