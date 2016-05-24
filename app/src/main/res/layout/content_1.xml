@@ -12,4 +12,11 @@
     tools:context="com.sarahehabm.instamonitor.Activity1"
     tools:showIn="@layout/activity_1">
 
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/switch1"
+        android:layout_alignParentTop="true"
+        android:text="@string/ignore_activity"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

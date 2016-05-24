@@ -1,14 +1,15 @@
 package com.sarahehabm.instamonitor;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import com.sarahehabm.instamonitorlibrary.model.InstaMonitorActivity;
 
-public class Activity1 extends InstaMonitorActivity {
+public class Activity1 extends InstaMonitorActivity
+        implements CompoundButton.OnCheckedChangeListener {
+    private Switch ignore_switch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,15 +18,28 @@ public class Activity1 extends InstaMonitorActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if(getActionBar()!=null)
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        ignore_switch = (Switch) findViewById(R.id.switch1);
+        if(isIgnored()) {
+            ignore_switch.setChecked(true);
+            ignore_switch.setTextOn(getString(R.string.ignore_activity_on));
+        } else {
+            ignore_switch.setChecked(false);
+            ignore_switch.setTextOff(getString(R.string.ignore_activity_off));
+        }
+        ignore_switch.setOnCheckedChangeListener(this);
     }
 
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if(isChecked)
+            setIgnored(true);
+        else
+            setIgnored(false);
+    }
 }

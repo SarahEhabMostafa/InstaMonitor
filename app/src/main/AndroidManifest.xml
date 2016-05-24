@@ -42,6 +42,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sarahehabm.instamonitor.MainActivity" />
         </activity>
+        <activity
+            android:name=".ViewStatsActivity"
+            android:label=""
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sarahehabm.instamonitor.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
