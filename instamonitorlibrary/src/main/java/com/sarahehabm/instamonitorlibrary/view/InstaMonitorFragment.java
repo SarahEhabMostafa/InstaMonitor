@@ -9,7 +9,9 @@ import com.sarahehabm.instamonitorlibrary.database.InstaMonitorDatabaseInterface
 import com.sarahehabm.instamonitorlibrary.model.InstaMonitorFragmentModel;
 
 /**
- * Created by Sarah E. Mostafa on 24-May-16.
+ Created by Sarah E. Mostafa on 24-May-16.
+
+ Fragments should extend this class to be able to monitor the duration
  */
 public class InstaMonitorFragment extends Fragment {
     private InstaMonitorFragmentModel model;

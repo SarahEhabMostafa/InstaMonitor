@@ -13,7 +13,7 @@ import android.util.Log;
 import com.sarahehabm.instamonitorlibrary.database.InstaMonitorContract.*;
 
 /**
- * Created by Sarah E. Mostafa on 23-May-16.
+ Created by Sarah E. Mostafa on 23-May-16.
  */
 public class InstaMonitorContentProvider extends ContentProvider {
     private static final String TAG = InstaMonitorContentProvider.class.getSimpleName();

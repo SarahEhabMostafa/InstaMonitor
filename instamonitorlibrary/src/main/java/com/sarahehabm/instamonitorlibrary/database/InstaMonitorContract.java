@@ -7,7 +7,9 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
- * Created by Sarah E. Mostafa on 23-May-16.
+ Created by Sarah E. Mostafa on 23-May-16.
+ <p/>
+ InstaMonitorContract class contains all the values that the user might need to access the database
  */
 public class InstaMonitorContract {
     public static final String CONTENT_AUTHORITY = "com.sarahehabm.instamonitorlibrary";

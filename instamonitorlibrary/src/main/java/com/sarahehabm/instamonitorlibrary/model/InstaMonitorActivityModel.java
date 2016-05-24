@@ -1,7 +1,7 @@
 package com.sarahehabm.instamonitorlibrary.model;
 
 /**
- * Created by Sarah E. Mostafa on 23-May-16.
+ Created by Sarah E. Mostafa on 23-May-16.
  */
 public class InstaMonitorActivityModel {
     private int id;

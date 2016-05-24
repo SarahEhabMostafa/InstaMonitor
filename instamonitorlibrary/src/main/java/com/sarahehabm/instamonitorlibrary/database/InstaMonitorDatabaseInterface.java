@@ -14,11 +14,23 @@ import com.sarahehabm.instamonitorlibrary.model.InstaMonitorFragmentModel;
 import java.util.ArrayList;
 
 /**
- * Created by Sarah E. Mostafa on 23-May-16.
+ Created by Sarah E. Mostafa on 23-May-16.
+ <p/>
+ InstaMonitorDatabaseInterface is a class exposing the methods that the user might need to get,
+ update, insert and delete activities, fragments and their data and times
  */
 public class InstaMonitorDatabaseInterface {
     private static final String TAG = InstaMonitorDatabaseInterface.class.getSimpleName();
 
+    /**
+     Inserts a new activity in the database
+
+     @param context
+     @param activityName
+     @param isIgnored
+
+     @return insertion uri
+     */
     public static Uri insertActivity(Context context, String activityName, boolean isIgnored) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(ActivityEntry.COLUMN_NAME, activityName);
@@ -28,6 +40,15 @@ public class InstaMonitorDatabaseInterface {
         return context.getContentResolver().insert(ActivityEntry.CONTENT_URI, contentValues);
     }
 
+    /**
+     Updates an activity's 'ignored' value in the database. Activity is identified by its name
+
+     @param context
+     @param activityName
+     @param isIgnored
+
+     @return number of the updated rows
+     */
     public static int updateActivity(Context context, String activityName, boolean isIgnored) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(ActivityEntry.COLUMN_IS_IGNORED, isIgnored);
@@ -38,6 +59,15 @@ public class InstaMonitorDatabaseInterface {
         return numUpdated;
     }
 
+    /**
+     Updates an activity's 'totalTime' value in the database. Activity is identified by its name
+
+     @param context
+     @param activityName
+     @param totalTime
+
+     @return number of the updated rows
+     */
     public static int updateActivity(Context context, String activityName, long totalTime) {
         int oldTime = getActivityTime(context, activityName);
         Log.v(TAG, "oldTime= " + oldTime);
@@ -54,6 +84,14 @@ public class InstaMonitorDatabaseInterface {
         return numUpdated;
     }
 
+    /**
+     Gets an activity from the database by its name
+
+     @param context
+     @param activityName
+
+     @return InstaMonitorActivityModel or null if the specified name was not found in the database
+     */
     public static InstaMonitorActivityModel getActivity(Context context, String activityName) {
         Cursor cursor = context.getContentResolver().query(ActivityEntry.CONTENT_URI,
                 null, ActivityEntry.COLUMN_NAME + " = ?", new String[]{activityName}, null);
@@ -79,6 +117,14 @@ public class InstaMonitorDatabaseInterface {
         return null;
     }
 
+    /**
+     Gets an activity's 'totalTime' from the database by its name
+
+     @param context
+     @param activityName
+
+     @return Activity's totalTime in milliseconds
+     */
     public static int getActivityTime(Context context, String activityName) {
         InstaMonitorActivityModel activityModel = getActivity(context, activityName);
         if (activityModel == null)
@@ -87,6 +133,13 @@ public class InstaMonitorDatabaseInterface {
         return activityModel.getTotalTime();
     }
 
+    /**
+     Gets all the activities from the database
+
+     @param context
+
+     @return ArrayList<InstaMonitorActivityModel>
+     */
     public static ArrayList<InstaMonitorActivityModel> getActivities(Context context) {
         ArrayList<InstaMonitorActivityModel> activities = new ArrayList<>();
         Cursor cursor = context.getContentResolver().
@@ -113,6 +166,14 @@ public class InstaMonitorDatabaseInterface {
         return activities;
     }
 
+    /**
+     Inserts a new fragment in the database
+
+     @param context
+     @param fragmentName
+
+     @return insertion uri
+     */
     public static Uri insertFragment(Context context, String fragmentName) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(FragmentEntry.COLUMN_NAME, fragmentName);
@@ -121,6 +182,15 @@ public class InstaMonitorDatabaseInterface {
         return context.getContentResolver().insert(FragmentEntry.CONTENT_URI, contentValues);
     }
 
+    /**
+     Updates a fragment's 'totalTime' value in the database. Fragment is identified by its name
+
+     @param context
+     @param fragmentName
+     @param totalTime
+
+     @return number of the updated rows
+     */
     public static int updateFragment(Context context, String fragmentName, long totalTime) {
         int oldTime = getFragmentTime(context, fragmentName);
         Log.v(TAG + "_FRAG", "oldTime= " + oldTime);
@@ -137,6 +207,14 @@ public class InstaMonitorDatabaseInterface {
         return numUpdated;
     }
 
+    /**
+     Gets a fragment from the database by its name
+
+     @param context
+     @param fragmentName
+
+     @return InstaMonitorFragmentModel or null if the specified name was not found in the database
+     */
     public static InstaMonitorFragmentModel getFragment(Context context, String fragmentName) {
         Cursor cursor = context.getContentResolver().query(FragmentEntry.CONTENT_URI,
                 null, FragmentEntry.COLUMN_NAME + " = ? ", new String[]{fragmentName}, null);
@@ -159,6 +237,14 @@ public class InstaMonitorDatabaseInterface {
         return null;
     }
 
+    /**
+     Gets a fragment's 'totalTime' from the database by its name
+
+     @param context
+     @param fragmentName
+
+     @return Fragment's totalTime in milliseconds
+     */
     public static int getFragmentTime(Context context, String fragmentName) {
         InstaMonitorFragmentModel fragmentModel = getFragment(context, fragmentName);
         if (fragmentModel == null)
@@ -167,6 +253,13 @@ public class InstaMonitorDatabaseInterface {
         return fragmentModel.getTotalTime();
     }
 
+    /**
+     Gets all the fragments from the database
+
+     @param context
+
+     @return ArrayList<InstaMonitorFragmentModel>
+     */
     public static ArrayList<InstaMonitorFragmentModel> getFragments(Context context) {
         ArrayList<InstaMonitorFragmentModel> fragments = new ArrayList<>();
         Cursor cursor = context.getContentResolver().
@@ -191,6 +284,13 @@ public class InstaMonitorDatabaseInterface {
         return fragments;
     }
 
+    /**
+     Deletes all the data from both the activity and fragment tables
+
+     @param context
+
+     @return number of rows deleted
+     */
     public static int clearAllData(Context context) {
         int numActivitiesDeleted =
                 context.getContentResolver().delete(ActivityEntry.CONTENT_URI, null, null);
@@ -200,6 +300,14 @@ public class InstaMonitorDatabaseInterface {
         return numActivitiesDeleted + numFragmentsDeleted;
     }
 
+    /**
+     Gets the total time of the application. The total time is calculated by adding the totalTimes of
+     all the activities that are not ignored
+
+     @param context
+
+     @return Total time of the application in milliseconds
+     */
     public static int getApplicationTime(Context context) {
         int totalTime = 0;
 

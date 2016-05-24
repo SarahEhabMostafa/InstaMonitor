@@ -1,7 +1,7 @@
 package com.sarahehabm.instamonitorlibrary.model;
 
 /**
- * Created by Sarah E. Mostafa on 24-May-16.
+ Created by Sarah E. Mostafa on 24-May-16.
  */
 public class InstaMonitorFragmentModel {
     private int id;

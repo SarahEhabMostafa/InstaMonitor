@@ -7,7 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.sarahehabm.instamonitorlibrary.database.InstaMonitorContract.*;
 
 /**
- * Created by Sarah E. Mostafa on 23-May-16.
+ Created by Sarah E. Mostafa on 23-May-16.
+ <p/>
+ DatabaseHelper class
  */
 public class InstaMonitorDatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 2;
