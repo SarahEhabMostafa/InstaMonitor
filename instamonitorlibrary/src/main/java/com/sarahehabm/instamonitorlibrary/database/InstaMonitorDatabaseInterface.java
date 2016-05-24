@@ -11,22 +11,13 @@ import com.sarahehabm.instamonitorlibrary.database.InstaMonitorContract.Fragment
 import com.sarahehabm.instamonitorlibrary.model.InstaMonitorActivityModel;
 import com.sarahehabm.instamonitorlibrary.model.InstaMonitorFragmentModel;
 
+import java.util.ArrayList;
+
 /**
  * Created by Sarah E. Mostafa on 23-May-16.
  */
 public class InstaMonitorDatabaseInterface {
     private static final String TAG = InstaMonitorDatabaseInterface.class.getSimpleName();
-
-    /*public static Uri insertActivity(Context context) {
-        Random random = new Random();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ActivityEntry.COLUMN_ID, random.nextInt(5000));
-        contentValues.put(ActivityEntry.COLUMN_NAME, "ActivityName" + random.nextInt(50));
-        contentValues.put(ActivityEntry.COLUMN_IS_IGNORED, random.nextBoolean());
-        contentValues.put(ActivityEntry.COLUMN_TOTAL_TIME, 0);
-
-        return context.getContentResolver().insert(ActivityEntry.CONTENT_URI, contentValues);
-    }*/
 
     public static Uri insertActivity(Context context, String activityName, boolean isIgnored) {
         ContentValues contentValues = new ContentValues();
@@ -79,34 +70,25 @@ public class InstaMonitorDatabaseInterface {
 
             InstaMonitorActivityModel model =
                     new InstaMonitorActivityModel(id, name, isIgnored, totalTime);
+
+            cursor.close();
             return model;
         }
 
+        cursor.close();
         return null;
     }
 
     public static int getActivityTime(Context context, String activityName) {
-        /*Cursor cursor = context.getContentResolver().query(ActivityEntry.CONTENT_URI,
-                new String[]{ActivityEntry.COLUMN_TOTAL_TIME}, ActivityEntry.COLUMN_NAME + " = ?",
-                new String[]{activityName}, null);
-
-        if (cursor == null || cursor.getCount() <= 0)
-            return 0;
-
-        if (cursor.moveToFirst()) {
-            int time = cursor.getInt(cursor.getColumnIndex(ActivityEntry.COLUMN_TOTAL_TIME));
-            return time;
-        } else
-            return 0;*/
         InstaMonitorActivityModel activityModel = getActivity(context, activityName);
-        if(activityModel == null)
+        if (activityModel == null)
             return 0;
 
         return activityModel.getTotalTime();
     }
 
-    public static String getAllActivities(Context context) {
-        String result = "";
+    public static ArrayList<InstaMonitorActivityModel> getActivities(Context context) {
+        ArrayList<InstaMonitorActivityModel> activities = new ArrayList<>();
         Cursor cursor = context.getContentResolver().
                 query(ActivityEntry.CONTENT_URI, null, null, null, null);
 
@@ -122,25 +104,15 @@ public class InstaMonitorDatabaseInterface {
             boolean isIgnored = ignoredInt == 1;
             int totalTime = cursor.getInt(cursor.getColumnIndex(ActivityEntry.COLUMN_TOTAL_TIME));
 
-            result += "ActivityId: " + activityId + "\n"
-                    + "ActivityName: " + activityName + "\n"
-                    + "ActivityIsIgnored: " + isIgnored + "\n"
-                    + "ActivityTotalTime: " + totalTime + "\n\n";
+            InstaMonitorActivityModel activityModel = new InstaMonitorActivityModel(activityId,
+                    activityName, isIgnored, totalTime);
+            activities.add(activityModel);
         }
 
         cursor.close();
-        return result;
+        return activities;
     }
 
-    /*public static Uri insertFragment(Context context) {
-        Random random = new Random();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(FragmentEntry.COLUMN_ID, random.nextInt(5000));
-        contentValues.put(FragmentEntry.COLUMN_NAME, "FragmentName" + random.nextInt(50));
-        contentValues.put(FragmentEntry.COLUMN_TOTAL_TIME, 0);
-
-        return context.getContentResolver().insert(FragmentEntry.CONTENT_URI, contentValues);
-    }*/
     public static Uri insertFragment(Context context, String fragmentName) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(FragmentEntry.COLUMN_NAME, fragmentName);
@@ -151,9 +123,9 @@ public class InstaMonitorDatabaseInterface {
 
     public static int updateFragment(Context context, String fragmentName, long totalTime) {
         int oldTime = getFragmentTime(context, fragmentName);
-        Log.v(TAG+"_FRAG", "oldTime= " + oldTime);
+        Log.v(TAG + "_FRAG", "oldTime= " + oldTime);
         long combinedTime = totalTime + oldTime;
-        Log.v(TAG+"_FRAG", "combinedTime= " + combinedTime);
+        Log.v(TAG + "_FRAG", "combinedTime= " + combinedTime);
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(FragmentEntry.COLUMN_TOTAL_TIME, combinedTime);
@@ -161,7 +133,7 @@ public class InstaMonitorDatabaseInterface {
         int numUpdated =
                 context.getContentResolver().update(FragmentEntry.CONTENT_URI, contentValues,
                         FragmentEntry.COLUMN_NAME + " = ? ", new String[]{fragmentName});
-        Log.v(TAG+"_FRAG", "numUpdated= " + numUpdated);
+        Log.v(TAG + "_FRAG", "numUpdated= " + numUpdated);
         return numUpdated;
     }
 
@@ -179,22 +151,24 @@ public class InstaMonitorDatabaseInterface {
 
             InstaMonitorFragmentModel model =
                     new InstaMonitorFragmentModel(id, name, totalTime);
+            cursor.close();
             return model;
         }
 
+        cursor.close();
         return null;
     }
 
     public static int getFragmentTime(Context context, String fragmentName) {
         InstaMonitorFragmentModel fragmentModel = getFragment(context, fragmentName);
-        if(fragmentModel == null)
+        if (fragmentModel == null)
             return 0;
 
         return fragmentModel.getTotalTime();
     }
 
-    public static String getAllFragments(Context context) {
-        String result = "";
+    public static ArrayList<InstaMonitorFragmentModel> getFragments(Context context) {
+        ArrayList<InstaMonitorFragmentModel> fragments = new ArrayList<>();
         Cursor cursor = context.getContentResolver().
                 query(FragmentEntry.CONTENT_URI, null, null, null, null);
 
@@ -208,13 +182,13 @@ public class InstaMonitorDatabaseInterface {
             String fragmentName = cursor.getString(cursor.getColumnIndex(FragmentEntry.COLUMN_NAME));
             int totalTime = cursor.getInt(cursor.getColumnIndex(FragmentEntry.COLUMN_TOTAL_TIME));
 
-            result += "FragmentId: " + fragmentId + "\n"
-                    + "FragmentName: " + fragmentName + "\n"
-                    + "FragmentTotalTime: " + totalTime + "\n\n";
+            InstaMonitorFragmentModel fragmentModel = new InstaMonitorFragmentModel(fragmentId,
+                    fragmentName, totalTime);
+            fragments.add(fragmentModel);
         }
 
         cursor.close();
-        return result;
+        return fragments;
     }
 
     public static int clearAllData(Context context) {
@@ -231,7 +205,7 @@ public class InstaMonitorDatabaseInterface {
 
         Cursor cursor = context.getContentResolver().
                 query(ActivityEntry.CONTENT_URI, new String[]{ActivityEntry.COLUMN_TOTAL_TIME},
-                        null, null, null);
+                        ActivityEntry.COLUMN_IS_IGNORED + " = ? ", new String[]{"0"}, null);
 
         if (cursor == null || cursor.getCount() <= 0)
             return 0;

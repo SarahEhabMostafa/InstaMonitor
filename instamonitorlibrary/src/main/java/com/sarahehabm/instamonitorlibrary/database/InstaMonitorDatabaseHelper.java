@@ -10,7 +10,7 @@ import com.sarahehabm.instamonitorlibrary.database.InstaMonitorContract.*;
  * Created by Sarah E. Mostafa on 23-May-16.
  */
 public class InstaMonitorDatabaseHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "InstaMonitor.db";
 
     public InstaMonitorDatabaseHelper(Context context) {

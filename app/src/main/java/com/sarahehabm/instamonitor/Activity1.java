@@ -5,7 +5,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
-import com.sarahehabm.instamonitorlibrary.model.InstaMonitorActivity;
+import com.sarahehabm.instamonitorlibrary.view.InstaMonitorActivity;
 
 public class Activity1 extends InstaMonitorActivity
         implements CompoundButton.OnCheckedChangeListener {

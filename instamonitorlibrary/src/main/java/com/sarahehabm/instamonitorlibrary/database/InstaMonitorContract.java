@@ -23,8 +23,6 @@ public class InstaMonitorContract {
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_IS_IGNORED = "isIgnored";
-//        public static final String COLUMN_START_TIME = "startTime";
-//        public static final String COLUMN_END_TIME = "endTime";
         public static final String COLUMN_TOTAL_TIME = "totalTime";
 
         public static final Uri CONTENT_URI =
@@ -43,8 +41,6 @@ public class InstaMonitorContract {
                 + COLUMN_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_NAME + " TEXT NOT NULL, "
                 + COLUMN_IS_IGNORED + " INTEGER, "
-//                + COLUMN_START_TIME + " INTEGER, "
-//                + COLUMN_END_TIME + " INTEGER, "
                 + COLUMN_TOTAL_TIME + " INTEGER "
                 + ")";
 
@@ -60,8 +56,6 @@ public class InstaMonitorContract {
         //Table columns
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_NAME = "name";
-//        public static final String COLUMN_START_TIME = "startTime";
-//        public static final String COLUMN_END_TIME = "endTime";
         public static final String COLUMN_TOTAL_TIME = "totalTime";
 
         public static final Uri CONTENT_URI =
@@ -79,8 +73,6 @@ public class InstaMonitorContract {
         private static final String SQL_CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " ("
                 + COLUMN_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_NAME + " TEXT NOT NULL, "
-//                + COLUMN_START_TIME + " INTEGER, "
-//                + COLUMN_END_TIME + " INTEGER, "
                 + COLUMN_TOTAL_TIME + " INTEGER "
                 + ")";
 

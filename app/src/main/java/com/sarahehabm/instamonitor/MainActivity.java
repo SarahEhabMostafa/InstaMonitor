@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.sarahehabm.instamonitorlibrary.database.InstaMonitorDatabaseInterface;
-import com.sarahehabm.instamonitorlibrary.model.InstaMonitorActivity;
+import com.sarahehabm.instamonitorlibrary.view.InstaMonitorActivity;
 
 public class MainActivity extends InstaMonitorActivity {
     private static final String KEY_TEXT = "text";

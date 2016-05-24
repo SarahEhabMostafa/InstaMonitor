@@ -3,7 +3,7 @@ package com.sarahehabm.instamonitor;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import com.sarahehabm.instamonitorlibrary.model.InstaMonitorActivity;
+import com.sarahehabm.instamonitorlibrary.view.InstaMonitorActivity;
 
 public class Activity2 extends InstaMonitorActivity {
 

@@ -5,7 +5,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.sarahehabm.instamonitorlibrary.database.InstaMonitorDatabaseInterface;
-import com.sarahehabm.instamonitorlibrary.model.InstaMonitorActivity;
+import com.sarahehabm.instamonitorlibrary.view.InstaMonitorActivity;
 import com.sarahehabm.instamonitorlibrary.model.InstaMonitorActivityModel;
 import com.sarahehabm.instamonitorlibrary.model.InstaMonitorFragmentModel;
 

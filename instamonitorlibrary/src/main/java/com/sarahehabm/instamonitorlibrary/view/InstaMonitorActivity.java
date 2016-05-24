@@ -1,10 +1,11 @@
-package com.sarahehabm.instamonitorlibrary.model;
+package com.sarahehabm.instamonitorlibrary.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.sarahehabm.instamonitorlibrary.database.InstaMonitorDatabaseInterface;
+import com.sarahehabm.instamonitorlibrary.model.InstaMonitorActivityModel;
 
 /**
  * Created by Sarah E. Mostafa on 23-May-16.
@@ -19,7 +20,7 @@ public class InstaMonitorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         model = InstaMonitorDatabaseInterface.getActivity(this, getClass().getName());
-        if(model == null) {
+        if (model == null) {
             InstaMonitorDatabaseInterface.insertActivity(this, getClass().getName(), false);
             model = InstaMonitorDatabaseInterface.getActivity(this, getClass().getName());
         }
@@ -40,7 +41,7 @@ public class InstaMonitorActivity extends AppCompatActivity {
         endTimeStamp = System.currentTimeMillis();
         Log.v(model.getName(), "END= " + endTimeStamp);
 
-        InstaMonitorDatabaseInterface.updateActivity(this, model.getName(), endTimeStamp-startTimeStamp);
+        InstaMonitorDatabaseInterface.updateActivity(this, model.getName(), endTimeStamp - startTimeStamp);
     }
 
     public boolean isIgnored() {

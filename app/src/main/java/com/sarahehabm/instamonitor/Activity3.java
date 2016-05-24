@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 
-import com.sarahehabm.instamonitorlibrary.model.InstaMonitorActivity;
+import com.sarahehabm.instamonitorlibrary.view.InstaMonitorActivity;
 
 public class Activity3 extends InstaMonitorActivity {
 

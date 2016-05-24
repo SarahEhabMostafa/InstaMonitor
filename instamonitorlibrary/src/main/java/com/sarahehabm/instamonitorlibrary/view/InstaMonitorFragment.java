@@ -1,4 +1,4 @@
-package com.sarahehabm.instamonitorlibrary.model;
+package com.sarahehabm.instamonitorlibrary.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.sarahehabm.instamonitorlibrary.database.InstaMonitorDatabaseInterface;
+import com.sarahehabm.instamonitorlibrary.model.InstaMonitorFragmentModel;
 
 /**
  * Created by Sarah E. Mostafa on 24-May-16.
@@ -32,7 +33,7 @@ public class InstaMonitorFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
-        if(model!=null) {
+        if (model != null) {
             if (isVisibleToUser) {
                 startTimeStamp = System.currentTimeMillis();
                 Log.v(model.getName(), "START= " + startTimeStamp);
